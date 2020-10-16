@@ -38,14 +38,14 @@ typedef VECTOR_STRUCT VECTOR[1];
 
 static __inline void VECTOR_INIT(VECTOR vec) {
   vec[0].alloc = 8;
-  vec[0].arr = calloc(vec->alloc, sizeof(VECTOR_TYPE));
+  vec[0].arr = (VECTOR_TYPE *)calloc(vec->alloc, sizeof(VECTOR_TYPE));
   vec[0].size = 0;
 }
 
 static __inline void VECTOR_APPEND(VECTOR vec, VECTOR_TYPE elt) {
   if (vec[0].size == vec[0].alloc) {
     vec[0].alloc += (vec[0].alloc >> 1); /* Increase size by 50% */
-    vec[0].arr = realloc(vec[0].arr, vec[0].alloc * sizeof(VECTOR_TYPE));
+    vec[0].arr = (VECTOR_TYPE *)realloc(vec[0].arr, vec[0].alloc * sizeof(VECTOR_TYPE));
   }
 
   vec[0].arr[vec[0].size++] = elt;
